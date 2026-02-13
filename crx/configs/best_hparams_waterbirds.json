@@ -1,0 +1,13 @@
+{
+  "batch_size": 97,
+  "lr": 0.00791421119672138,
+  "weight_decay": 8.586180402734294e-05,
+  "cr_feat_dropout": 0.2,
+  "cr_concept_dropout": 0.2,
+  "cr_resid_dropout": 0.1,
+  "cr_reg": 1.0600355208684583e-05,
+  "cr_block_gates": true,
+  "cr_gate_init": 0.0,
+  "cr_gate_reg": 0.00021883692950537466,
+  "cr_concept_block_channels": []
+}

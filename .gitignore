@@ -1,0 +1,28 @@
+# datasets / outputs / cluster logs
+data/
+output/
+outputs/
+slurm/
+logs/
+wandb/
+
+# caches / artifacts
+artifacts*/
+cache*/
+*.pt
+*.pth
+*.pkl
+*.npz
+*.npy
+
+# python
+**/__pycache__/
+*.pyc
+.venv/
+.env
+.ipynb_checkpoints/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/

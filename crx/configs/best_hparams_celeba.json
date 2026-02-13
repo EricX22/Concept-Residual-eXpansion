@@ -1,0 +1,13 @@
+{
+  "batch_size": 108,
+  "lr": 0.001,
+  "weight_decay": 0.0001,
+  "cr_feat_dropout": 0.5,
+  "cr_concept_dropout": 0.0,
+  "cr_resid_dropout": 0.0,
+  "cr_reg": 0.0,
+  "cr_block_gates": false,
+  "cr_gate_init": 0.0,
+  "cr_gate_reg": 0.0,
+  "cr_concept_block_channels": ["environment_context", "imaging_artifacts"]
+}
