@@ -20,7 +20,7 @@ The code is intentionally trimmed for anonymous release and currently supports:
 ```bash
 
 conda env create -f environment.yml
-conda activate subpop_bench
+conda activate crx
 
 ```
 
