@@ -1,6 +1,6 @@
-# CRX: Concept + Residual Expansion for Subpopulation Robustness
+# CRX: Concept-Residual Representation Expansion for Robustness to Spurious Correlations
 
-This repository provides a reproducible implementation of **CRX**, a two-stage method for improving worst-group accuracy under subpopulation shift using:
+This repository provides a reproducible implementation of **CRX**, a two-stage method for improving worst-group accuracy under spurious correlations using:
 
 * Frozen stage-1 ERM features
 * CLIP concept logits
@@ -36,7 +36,7 @@ pip install -r requirements.txt
 
 ## Data
 
-Place datasets under a single root directory (referred to below as `DATA_DIR`) using the standard SubpopBench layout.
+Place datasets under a single root directory (referred to below as `DATA_DIR`).
 
 Supported datasets in this minimal repo:
 
