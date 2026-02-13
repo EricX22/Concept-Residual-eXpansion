@@ -16,7 +16,7 @@ from tensorboard_logger import Logger
 
 from crx import hparams_registry
 from crx.dataset import datasets
-from crx.learning import algorithms
+from crx.learning import algorithms, early_stopping
 from crx.utils import misc, eval_helper
 from crx.dataset.fast_dataloader import InfiniteDataLoader, FastDataLoader
 from crx.utils.cache_preflight import ensure_cr_caches
