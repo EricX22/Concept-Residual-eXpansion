@@ -1,4 +1,4 @@
-name: subpop_bench
+name: crx
 dependencies:
 - python=3.9.7
 - pip
