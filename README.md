@@ -1,5 +1,7 @@
 # CRX: Concept-Residual Representation Expansion for Robustness to Spurious Correlations
 
+[![DOI](https://zenodo.org/badge/1153242215.svg)](https://doi.org/10.5281/zenodo.20467988)
+
 This repository provides a reproducible implementation of **CRX**, a two-stage method for improving worst-group accuracy under spurious correlations using:
 
 * Frozen stage-1 ERM features
