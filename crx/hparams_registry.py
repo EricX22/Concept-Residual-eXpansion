@@ -5,11 +5,7 @@ from crx.utils import misc
 def _hparams(algorithm, dataset, random_seed):
     """
     Global registry of hyperparams. Each entry is a (default, random) tuple.
-    Keep this minimal for anonymous release.
     """
-    IMAGE_DATASETS = ["Waterbirds", "CelebA"]
-    assert dataset in IMAGE_DATASETS, f"Unsupported dataset in minimal repo: {dataset}"
-
     hparams = {}
 
     def _hparam(name, default_val, random_val_fn):
@@ -53,9 +49,6 @@ def _hparams(algorithm, dataset, random_seed):
         _hparam('jtt_lambda', 10, lambda r: 10**r.uniform(0, 2.5))
 
     elif algorithm == "CRX":
-        # Sweep knobs
-        _hparam("batch_size", 128, lambda r: int(r.choice([64, 96, 128, 160])))
-
         _hparam("cr_feat_dropout", 0.0, lambda r: float(r.choice([0.0, 0.2, 0.5])))
         _hparam("cr_concept_dropout", 0.0, lambda r: float(r.choice([0.0, 0.1, 0.2])))
         _hparam("cr_resid_dropout", 0.0, lambda r: float(r.choice([0.0, 0.1, 0.2])))

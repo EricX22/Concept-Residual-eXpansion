@@ -6,10 +6,11 @@ This repository provides a reproducible implementation of **CRX**, a two-stage m
 * CLIP concept logits
 * Residual PCA features (stage-1 features with the concept-predictable component removed)
 
-The code is intentionally trimmed for anonymous release and currently supports:
+Supported datasets:
 
 * Waterbirds
 * CelebA
+* CheXpert (No Finding)
 
 ---
 
@@ -38,10 +39,33 @@ pip install -r requirements.txt
 
 Place datasets under a single root directory (referred to below as `DATA_DIR`).
 
-Supported datasets in this minimal repo:
+### Waterbirds
 
-* Waterbirds
-* CelebA
+Download the dataset and generate the metadata CSV:
+
+```bash
+python -m crx.scripts.download waterbirds --data_path "$DATA_DIR" --download
+```
+
+This fetches `waterbird_complete95_forest2water2.tar.gz` from the [Stanford NLP group](https://nlp.stanford.edu/data/dro/waterbird_complete95_forest2water2.tar.gz) and writes `metadata_waterbirds.csv`.
+
+### CelebA
+
+```bash
+python -m crx.scripts.download celeba --data_path "$DATA_DIR" --download
+```
+
+This downloads the aligned images and attribute files from Google Drive and writes `metadata_celeba.csv`.
+
+### CheXpert (No Finding)
+
+CheXpert requires a free registration at [stanfordmlgroup.github.io/competitions/chexpert](https://stanfordmlgroup.github.io/competitions/chexpert). Download the dataset and place it under `DATA_DIR/chexpert/`.
+
+The split/group metadata file (`metadata_no_finding.csv`) follows the [SubpopBench](https://github.com/YyzHarry/SubpopBench) format. Place it at:
+
+```
+DATA_DIR/chexpert/subpop_bench_meta/metadata_no_finding.csv
+```
 
 ---
 
@@ -140,6 +164,17 @@ Repeat the same three steps, replacing:
 
 ---
 
+## Quickstart (CheXpert)
+
+Repeat the same three steps, replacing:
+
+* `--dataset Waterbirds` → `--dataset CheXpertNoFinding`
+* Use a new artifact directory (e.g., `chexpert_crx_v1`)
+
+The concept bank for CheXpert uses `--modality medical_xray` automatically when invoked via `setup_crx_artifacts`.
+
+---
+
 ## Outputs and Metrics
 
 During training, the system reports:
@@ -157,6 +192,7 @@ We provide the hyperparameters used for the best runs reported in the paper:
 
 - `configs/best_hparams_waterbirds.json`
 - `configs/best_hparams_celeba.json`
+- `configs/best_hparams_chexpert.json`
 
 These JSON files include only *algorithm hyperparameters* (e.g., lr, weight decay, dropouts, gate regularization).  
 They do **not** include dataset/artifact paths; those are supplied via the artifact setup step or the sweep script.
@@ -195,6 +231,21 @@ python -m crx.train \
   --hparams_seed 0 \
   --seed 0 \
   --hparams "$(cat configs/best_hparams_celeba.json)"
+```
+
+```bash
+python -m crx.train \
+  --dataset CheXpertNoFinding \
+  --algorithm CRX \
+  --train_attr no \
+  --data_dir "$DATA_DIR" \
+  --output_dir "$OUT_DIR" \
+  --output_folder_name chexpert_crx_best \
+  --stage1_folder "$STAGE1_FOLDER" \
+  --stage1_algo ERM \
+  --hparams_seed 0 \
+  --seed 0 \
+  --hparams "$(cat configs/best_hparams_chexpert.json)"
 ```
 
 ## Hyperparameter Sweeps

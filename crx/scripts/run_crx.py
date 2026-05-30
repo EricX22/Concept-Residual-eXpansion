@@ -13,7 +13,7 @@ def main():
     ap = argparse.ArgumentParser("Run a CRX training job with an artifact directory (no manual JSON).")
 
     # core train.py args
-    ap.add_argument("--dataset", default="Waterbirds", choices=["Waterbirds", "CelebA"])
+    ap.add_argument("--dataset", default="Waterbirds", choices=["Waterbirds", "CelebA", "CheXpertNoFinding"])
     ap.add_argument("--data-dir", required=True)
     ap.add_argument("--output-dir", default="./output")
     ap.add_argument("--output-folder-name", default="crx_run")

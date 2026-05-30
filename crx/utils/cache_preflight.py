@@ -177,7 +177,6 @@ def ensure_cr_caches(
                             "--split", split,
                             "--meta", str(meta_path),
                             "--out", str(outp),
-                            "--fp16",
                         ],
                         cwd=repo_dir,
                     )

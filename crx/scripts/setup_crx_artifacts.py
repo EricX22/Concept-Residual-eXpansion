@@ -67,12 +67,16 @@ def dataset_defaults(dataset: str) -> Dict[str, object]:
             "labels": [{"name": "landbird"}, {"name": "waterbird"}],
         }
     if dataset == "CelebA":
-        # You may want to adjust depending on which CelebA target label you're using in the paper.
-        # This is a safe placeholder for concept-bank generation.
         return {
             "task_id": "celeba",
             "modality": "natural_image",
             "labels": [{"name": "smiling"}, {"name": "not_smiling"}],
+        }
+    if dataset == "CheXpertNoFinding":
+        return {
+            "task_id": "chexpert_no_finding",
+            "modality": "medical_xray",
+            "labels": [{"name": "finding"}, {"name": "no_finding"}],
         }
     raise ValueError(f"No dataset defaults defined for: {dataset}")
 
@@ -81,7 +85,7 @@ def main() -> None:
     p = argparse.ArgumentParser("Setup CRX artifacts (concept bank/meta, CLIP cache, stage-1 feats, residual PCA).")
 
     # Minimum required set
-    p.add_argument("--dataset", type=str, required=True, choices=["Waterbirds", "CelebA"])
+    p.add_argument("--dataset", type=str, required=True, choices=["Waterbirds", "CelebA", "CheXpertNoFinding"])
     p.add_argument("--data-dir", type=str, required=True)
     p.add_argument("--stage1-folder", type=str, required=True,
                    help="Folder containing stage-1 CRX runs (each has model.pkl).")

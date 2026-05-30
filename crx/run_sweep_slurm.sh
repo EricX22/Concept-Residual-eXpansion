@@ -22,7 +22,7 @@ OUT_DIR="/path/to/output"                  # where training runs are written
 ART_DIR="/path/to/artifacts/wb_crx_v1"      # where CRX artifacts are written (recommended)
 
 # Experiment selection
-DATASET="Waterbirds"                       # Waterbirds or CelebA
+DATASET="Waterbirds"                       # Waterbirds, CelebA, or CheXpertNoFinding
 TRAIN_ATTR="no"                            # yes/no (must match crx.train choices)
 
 # Sweep tag (used for output folder name + Slurm job name)

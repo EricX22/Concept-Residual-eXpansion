@@ -12,9 +12,9 @@ from torchvision import datasets
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 DATASETS = [
-    # Current subpop datasets
     "Waterbirds",
     "CelebA",
+    "CheXpertNoFinding",
 ]
 
 
@@ -110,6 +110,22 @@ class SubpopDataset:
         return len(self.idx)
 
 
+class BaseImageDataset(SubpopDataset):
+
+    def __init__(self, metadata, split, train_attr='yes', subsample_type=None, duplicates=None):
+        transform = transforms.Compose([
+            transforms.Resize(256),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+        ])
+        self.data_type = "images"
+        super().__init__('/', split, metadata, transform, train_attr, subsample_type, duplicates)
+
+    def transform(self, x):
+        return self.transform_(Image.open(x).convert("RGB"))
+
+
 class Waterbirds(SubpopDataset):
     CHECKPOINT_FREQ = 300
     INPUT_SHAPE = (3, 224, 224,)
@@ -149,3 +165,14 @@ class CelebA(SubpopDataset):
 
     def transform(self, x):
         return self.transform_(Image.open(x).convert("RGB"))
+
+
+class CheXpertNoFinding(BaseImageDataset):
+    N_STEPS = 20001
+    CHECKPOINT_FREQ = 1000
+    N_WORKERS = 8
+    INPUT_SHAPE = (3, 224, 224,)
+
+    def __init__(self, data_path, split, hparams, train_attr='yes', subsample_type=None, duplicates=None):
+        metadata = os.path.join(data_path, "chexpert", "subpop_bench_meta", "metadata_no_finding.csv")
+        super().__init__(metadata, split, train_attr, subsample_type, duplicates)
